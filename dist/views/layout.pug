@@ -4,4 +4,17 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    nav
+      ul
+        li
+          a(href='/') Home
+        li
+          a(href='/books') Books
+        li
+          a(href='/books/add') Add Book
+        li
+          form(action='/', method='get')
+            input(type='text', name='search_query', placeholder='Search by Title or Author')
+            button(type='submit') Submit
+
     block content
