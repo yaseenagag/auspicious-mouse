@@ -3,18 +3,35 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css')
   body
-    nav
-      ul
-        li
-          a(href='/') Home
-        li
-          a(href='/books') Books
-        li
-          a(href='/books/add') Add Book
-        li
-          form(action='/', method='get')
-            input(type='text', name='search_query', placeholder='Search by Title or Author')
-            button(type='submit') Submit
 
-    block content
+      nav.navbar.navbar-inverse
+        .container-fluid
+
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='/') Logo
+
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li
+                a(href='/') Home
+              li
+                a(href='/books') Books
+
+            form.navbar-form.navbar-right(action='/', method='get')
+              .form-group
+                input.form-control(type='text', placeholder='Search by Title or Author')
+              button.btn.btn-default(type='submit') Submit
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='/books/add') Add Book
+
+
+
+  block content
