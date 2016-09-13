@@ -9,4 +9,9 @@ block content
 
 
   h3 Book Image
-  img(src =book.image )
+  img(src=book.image)
+
+  h3 Authors
+  ol
+    for author in book.authors
+      li= author.name

@@ -4,9 +4,9 @@ const db = require('../database')
 
 
 router.get('/', function(req, res) {
-  db.Books.all()
-    .then(allbooks => {
-      res.render('books', { allbooks } )
+  db.getAllBooks()
+    .then(books => {
+      res.render('books', { books } )
     })
     .catch(error => {
       res.render('error', {error})
@@ -14,9 +14,9 @@ router.get('/', function(req, res) {
 })
 
 router.get('/details/:id', function(req, res) {
-  const { id } = request.params
+  const { id } = req.params
 
-  db.Books.getWithDetails(id)
+  db.getBookByIdWithAuthors(id)
     .then(book => {
       res.render('details', {
         book: book
