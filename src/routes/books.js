@@ -30,4 +30,18 @@ router.get('/details/:id', (req, res) => {
     })
 })
 
+router.get('/add', (req, res) => {
+  res.render( 'add', {book: {} } )
+})
+
+router.post ('/', (req, res) => {
+  const {book} = req.body
+  db.createBook(book)
+    .then(book =>
+      res.redirect( '/books/'+ book.id) )
+    .catch(error => {
+      res.render('error', {error})
+    })
+})
+
 module.exports = router

@@ -109,6 +109,18 @@ const getAuthorsForBooks = (books) => {
   return db.manyOrNone(sql, [bookIds])
 }
 
+const createBook = (books) => {
+  const sql = `
+    INSERT INTO
+      books (title, description, image)
+    VALUES
+      ($1, $2, $3)
+    RETURNING
+      id
+  `
+  return db.oneorNone(sql, [title, description, image])
+}
+
 module.exports = {
   getAllBooks,
   getBookById,
