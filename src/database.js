@@ -109,16 +109,55 @@ const getAuthorsForBooks = (books) => {
   return db.manyOrNone(sql, [bookIds])
 }
 
-const createBook = (books) => {
+const createBook = (attributes) => {
   const sql = `
     INSERT INTO
       books (title, description, image)
     VALUES
       ($1, $2, $3)
     RETURNING
-      id
+      *
   `
-  return db.oneorNone(sql, [title, description, image])
+  const variables = [
+    attributes.title,
+    attributes.description,
+    attributes.image
+  ]
+  const insertBookQuery = db.one(sql, variables)
+  const insertAuthorQuery = createAuthor(attributes.author)
+  return Promise.all([
+    insertBookQuery,
+    insertAuthorQuery
+  ])
+    .then(results => {
+      const book = results[0]
+      const author = results[1]
+      return associateBookAndAuthor(book, author)
+        .then(() => book)
+    })
+}
+
+const associateBookAndAuthor = (book, author) => {
+  const sql = `
+    INSERT INTO
+      book_authors(book_id, author_id)
+    VALUES
+      ($1, $2)
+  `
+  const variables = [book.id, author.id]
+  return db.none(sql, variables)
+}
+const createAuthor = (authorName) => {
+  const sql = `
+    INSERT INTO
+      authors (name)
+    VALUES
+      ($1)
+    RETURNING
+      *
+  `
+  const variables = [authorName]
+  return db.one(sql, variables)
 }
 
 module.exports = {
@@ -126,5 +165,6 @@ module.exports = {
   getBookById,
   getBookByIdWithAuthors,
   getAuthorsByBookId,
-  findBooks
+  findBooks,
+  createBook
 }

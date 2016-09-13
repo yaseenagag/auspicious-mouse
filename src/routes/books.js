@@ -3,6 +3,7 @@ const router = express.Router()
 const db = require('../database')
 
 
+// INDEX
 router.get('/', (req, res) => {
 
   const sqlQuery = 'q' in req.query ?
@@ -16,7 +17,27 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/details/:id', (req, res) => {
+// NEW
+router.get('/new', (req, res) => {
+  res.render('books/new', {
+    book: {}
+  })
+})
+
+// CREATE
+router.post('/', (req, res) => {
+  const { book } = req.body
+  db.createBook(book)
+    .then(book => {
+      res.redirect( '/books/'+ book.id)
+    })
+    .catch(error => {
+      res.render('error', {error})
+    })
+})
+
+// SHOW
+router.get('/:id', (req, res) => {
   const { id } = req.params
 
   db.getBookByIdWithAuthors(id)
@@ -30,18 +51,13 @@ router.get('/details/:id', (req, res) => {
     })
 })
 
-router.get('/add', (req, res) => {
-  res.render( 'add', {book: {} } )
-})
+router.get('/:id/edit', (req, res) => {
 
-router.post ('/', (req, res) => {
-  const {book} = req.body
-  db.createBook(book)
-    .then(book =>
-      res.redirect( '/books/'+ book.id) )
-    .catch(error => {
-      res.render('error', {error})
-    })
-})
+});
+
+router.get('/:id/delete', (req, res) => {
+
+});
+
 
 module.exports = router
