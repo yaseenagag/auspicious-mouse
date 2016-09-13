@@ -7,4 +7,9 @@ block content
   ol
     for book in books
       li
+        img(src=book.image)
         a(href="books/details/"+book.id)= book.title
+        p= book.description
+        ul
+          for author in book.authors
+            li= author.name

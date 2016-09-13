@@ -4,7 +4,11 @@ const db = require('../database')
 
 
 router.get('/', function(req, res) {
-  db.getAllBooks()
+
+  const sqlQuery = 'q' in req.query ?
+    db.findBooks(req.query.q) : db.getAllBooks()
+  ;
+  sqlQuery
     .then(books => {
       res.render('books', { books } )
     })
@@ -26,6 +30,5 @@ router.get('/details/:id', function(req, res) {
       res.render('error', {error})
     })
 })
-
 
 module.exports = router;
