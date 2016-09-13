@@ -14,9 +14,13 @@ router.get('/', function(req, res) {
 })
 
 router.get('/details/:id', function(req, res) {
-  db.Books.getBookById(req.params.id)
+  const { id } = request.params
+
+  db.Books.getWithDetails(id)
     .then(book => {
-      res.render('details', { book: book } )
+      res.render('details', {
+        book: book
+      })
     })
     .catch(error => {
       res.render('error', {error})
