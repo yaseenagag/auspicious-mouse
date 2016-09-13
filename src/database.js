@@ -29,9 +29,9 @@ const getBookByIdWithAuthors = (id) => {
     getBookById(id),
     getAuthorsByBookId(id)
   ]).then(details => {
-    const book = details[0];
-    book.authors = details[1];
-    return book;
+    const book = details[0]
+    book.authors = details[1]
+    return book
   })
 }
 
@@ -87,7 +87,7 @@ const addAuthorsToBooks = books => {
         author.book_id === book.id
       )
     })
-    return books;
+    return books
   })
 }
 

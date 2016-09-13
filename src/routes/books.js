@@ -3,11 +3,10 @@ const router = express.Router()
 const db = require('../database')
 
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
 
   const sqlQuery = 'q' in req.query ?
     db.findBooks(req.query.q) : db.getAllBooks()
-  ;
   sqlQuery
     .then(books => {
       res.render('books', { books } )
@@ -17,7 +16,7 @@ router.get('/', function(req, res) {
     })
 })
 
-router.get('/details/:id', function(req, res) {
+router.get('/details/:id', (req, res) => {
   const { id } = req.params
 
   db.getBookByIdWithAuthors(id)
@@ -31,4 +30,4 @@ router.get('/details/:id', function(req, res) {
     })
 })
 
-module.exports = router;
+module.exports = router
