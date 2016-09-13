@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../database')
 
-/* GET users listing. */
+
 router.get('/', function(req, res) {
   db.Books.all()
     .then(allbooks => {
@@ -11,8 +11,17 @@ router.get('/', function(req, res) {
     .catch(error => {
       res.render('error', {error})
     })
-});
+})
 
+router.get('/details/:id', function(req, res) {
+  db.Books.getBookById(req.params.id)
+    .then(book => {
+      res.render('details', { book: book } )
+    })
+    .catch(error => {
+      res.render('error', {error})
+    })
+})
 
 
 module.exports = router;
