@@ -3,3 +3,8 @@ extends layout
 block content
   h1= title
   p Welcome to booklisting
+
+  ol
+    for book in allbooks
+      li
+        a(href="books/details/"+book.id)= book.title
