@@ -16,4 +16,4 @@ block content
     for author in book.authors
       li= author.name
 
-  a(href='/books/delete/'+book.id) Delete Book
+  a(href=`/books/${book.id}/delete`) Delete Book
