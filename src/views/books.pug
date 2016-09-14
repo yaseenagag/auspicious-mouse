@@ -2,14 +2,20 @@ extends layout
 
 block content
   h1= title
-  p Welcome to booklisting
 
-  ol
-    for book in books
-      li
-        img(src=book.image)
-        a(href="books/"+book.id)= book.title
-        p= book.description
-        ul
-          for author in book.authors
-            li= author.name
+  if books.length > 0
+    ol
+      for book in books
+        li
+          img(src=book.image)
+          a(href="books/"+book.id)= book.title
+          p= book.description
+          ul
+            for author in book.authors
+              li= author.name
+
+  else
+    h3
+      span Sorry, I can't find any result for&nbsp;
+      span= search
+      span &nbsp;when searching.
