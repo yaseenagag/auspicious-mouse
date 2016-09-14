@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     db.findBooks(req.query.q) : db.getAllBooks()
   sqlQuery
     .then(books => {
-      res.render('books', { books } )
+      res.render('books', { books, search: req.query.q } )
     })
     .catch(error => {
       res.render('error', {error})

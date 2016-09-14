@@ -92,6 +92,7 @@ const addAuthorsToBooks = books => {
 }
 
 const getAuthorsForBooks = (books) => {
+  if (books.length === 0) return Promise.resolve( [] )
   const bookIds = books.map(book => book.id)
   const sql = `
     SELECT
