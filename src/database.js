@@ -169,7 +169,7 @@ const deleteBook = (bookIds) => {
       id=$1
   `
   const variables = [bookIds]
-  return db.one(sql, variables)
+  return db.none(sql, variables)
 }
 
 

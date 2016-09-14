@@ -55,8 +55,8 @@ router.get('/:id/edit', (req, res) => {
 
 })
 
-router.get('/:id/delete', (req, res) => {
-  db.deleteBook( request.params.id )
+router.get('/delete/:id', (req, res) => {
+  db.deleteBook( req.body.id )
     .then( result => res.redirect ( '/' ))
     .catch( error => res.render( 'error', {error} ))
 })
