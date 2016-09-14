@@ -53,11 +53,13 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/edit', (req, res) => {
 
-});
+})
 
 router.get('/:id/delete', (req, res) => {
-
-});
+  db.deleteBook( req.params.id )
+    .then( result => res.redirect ( '/' ))
+    .catch( error => res.render( 'error', {error} ))
+})
 
 
 module.exports = router
