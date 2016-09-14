@@ -161,11 +161,24 @@ const createAuthor = (authorName) => {
   return db.one(sql, variables)
 }
 
+const deleteBook = (bookIds) => {
+  const sql = `
+    DELETE FROM
+      books
+    WHERE
+      id=$1
+  `
+  const variables = [bookIds]
+  return db.one(sql, variables)
+}
+
+
 module.exports = {
   getAllBooks,
   getBookById,
   getBookByIdWithAuthors,
   getAuthorsByBookId,
   findBooks,
-  createBook
+  createBook,
+  deleteBook
 }

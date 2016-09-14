@@ -15,3 +15,5 @@ block content
   ol
     for author in book.authors
       li= author.name
+
+  a(href='/books/delete/${book.id}') Delete Book
