@@ -1,19 +1,17 @@
 extends layout
 
 block content
-  h1 Title
-  h1= book.title
-
-  h2 Book Description
-  h2= book.description
+  h1.h1.text-center= book.title
 
 
-  h3 Book Image
-  img(src=book.image)
+  img.img-rounded(src=book.image)
 
-  h3 Authors
-  ol
+  h3.h3 Description
+  p.lead= book.description
+
+  h3.h3 Authors
+  ul.list-unstyled
     for author in book.authors
       li= author.name
-
+  
   a(href=`/books/${book.id}/delete`) Delete Book
