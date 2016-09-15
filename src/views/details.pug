@@ -13,5 +13,5 @@ block content
   ul.list-unstyled
     for author in book.authors
       li= author.name
-  
-  a(href=`/books/${book.id}/delete`) Delete Book
+  span
+    a.btn.btn-default(href=`/books/${book.id}/delete`) Delete This Book

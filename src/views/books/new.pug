@@ -1,17 +1,16 @@
 extends ../layout
 
 block content
-  h1= title
-  p Welcome to add page
+  h2.h2.text-center Please add a new book
 
-  form(method='post', action=(book.id ? '/books/'+book.id : '/books'))
-    div
+  form.form-group(method='post', action=(book.id ? '/books/'+book.id : '/books'))
+    div.form-group
       input(type='text', name='book[title]', placeholder='Title', value=`${book.title || ''}`)
-    div
+    div.form-group
       input(type='text', name='book[author]', placeholder='Author')
-    div
+    div.form-group
       textarea(name='book[description]', placeholder='Description')= book.description
-    div
+    div.form-group
       input(type='text', name='book[image]', placeholder='Image URL', value=`${book.image || ''}`)
     div
       input(type='submit', value='Submit')
