@@ -2,6 +2,7 @@ extends layout
 
 block content
 
+  if books.length > 0
     table
       thead
         tr
@@ -21,6 +22,13 @@ block content
               for author in book.authors
                 li= author.name
 
-    if page > 1
-      a(href=`?page=${page - 1}`) &laquo;
-    a(href=`?page=${page + 1}`) &raquo;
+  else
+    h3
+      span Sorry, I can't find any result for&nbsp;"
+      span= search
+      span "&nbsp;when searching.
+
+  if page > 1
+    a(href=`/search/?page=${page - 1}`) &laquo;
+
+  a(href='/search/' + (page + 1) + '?q='+ search  ) &raquo;
