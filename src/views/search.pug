@@ -31,4 +31,4 @@ block content
   if page > 1
     a(href=`/search/?page=${page - 1}`) &laquo;
 
-  a(href='/search/?page=' + (page + 1) ) &raquo;
+  a(href='/search/' + (page + 1) + '?q='+ search  ) &raquo;
