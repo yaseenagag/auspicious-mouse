@@ -5,12 +5,17 @@ const db = require('../database')
 
 // INDEX
 router.get('/', (req, res) => {
+  let page = ( parseInt( req.query.page, 10 ) ) || 1
 
   const sqlQuery = 'q' in req.query ?
-    db.findBooks(req.query.q) : db.getAllBooks()
+    db.findBooks(req.query.q) : db.getAllBooks(page)
   sqlQuery
     .then(books => {
-      res.render('books', { books, search: req.query.q } )
+      res.render('books', {
+        books: books,
+        page: page,
+        search: req.query.q
+      })
     })
     .catch(error => {
       res.render('error', {error})

@@ -1,14 +1,20 @@
 const pgp = require('pg-promise')()
 const db = pgp({database: 'mousey'})
 
-const getAllBooks = () => {
+const getAllBooks = (page = 1) => {
+  const offset = (page-1) * 10
   const sql = `
     SELECT
       *
     FROM
       books
+    LIMIT
+      10
+    OFFSET
+      $1
   `
-  return db.manyOrNone(sql).then(addAuthorsToBooks)
+  const variables = [offset]
+  return db.manyOrNone(sql, variables, page).then(addAuthorsToBooks)
 }
 
 const getBookById = (id) => {
@@ -52,7 +58,7 @@ const getAuthorsByBookId = (id) => {
   return db.manyOrNone(sql, variables)
 }
 
-const findBooks = (query) => {
+const findBooks = (query, page = 1 ) => {
   const sql = `
     SELECT DISTINCT
       books.*
@@ -148,6 +154,7 @@ const associateBookAndAuthor = (book, author) => {
   const variables = [book.id, author.id]
   return db.none(sql, variables)
 }
+
 const createAuthor = (authorName) => {
   const sql = `
     INSERT INTO

@@ -16,6 +16,10 @@ block content
 
   else
     h3
-      span Sorry, I can't find any result for&nbsp;
+      span Sorry, I can't find any result for&nbsp;"
       span= search
-      span &nbsp;when searching.
+      span "&nbsp;when searching.
+
+  if page > 1
+    a(href="/page="+(page - 1 )) Prev
+  a(href="/page="+(page + 1 )) Next
