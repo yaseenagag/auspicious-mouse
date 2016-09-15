@@ -14,7 +14,7 @@ const getAllBooks = (page = 1) => {
       $1
   `
   const variables = [offset]
-  return db.manyOrNone(sql, variables, page).then(addAuthorsToBooks)
+  return db.manyOrNone(sql, variables).then(addAuthorsToBooks)
 }
 
 const getBookById = (id) => {
