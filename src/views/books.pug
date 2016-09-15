@@ -1,18 +1,26 @@
 extends layout
 
 block content
-  h1= title
 
   if books.length > 0
-    ol
-      for book in books
-        li
-          img(src=book.image)
-          a(href="books/"+book.id)= book.title
-          p= book.description
-          ul
-            for author in book.authors
-              li= author.name
+    table
+      thead
+        tr
+          th
+          th Title
+          th Description
+          th Author
+      tbody
+        for book in books
+          tr
+            td
+              img(src=book.image)
+            td
+              a(href="books/"+book.id)=book.title
+            td= book.description
+            td
+              for author in book.authors
+                li= author.name
 
   else
     h3
@@ -21,5 +29,5 @@ block content
       span "&nbsp;when searching.
 
   if page > 1
-    a(href="/books/page="+(page - 1 )) &laquo;
-  a(href="/books/page=?" + (page + 1 )) &raquo;
+    a(href=`?page=${page - 1}`) &laquo;
+  a(href=`?page=${page + 1}`) &raquo;
