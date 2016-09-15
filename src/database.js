@@ -59,6 +59,7 @@ const getAuthorsByBookId = (id) => {
 }
 
 const findBooks = (query, page = 1 ) => {
+  const offset = (page-1) * 10
   const sql = `
     SELECT DISTINCT
       books.*
@@ -78,9 +79,13 @@ const findBooks = (query, page = 1 ) => {
       LOWER(description) LIKE $1
     OR
       LOWER(authors.name) LIKE $1
+    LIMIT
+      10
+    OFFSET
+      $2
   `
   const variables = [
-    '%'+query.replace(/\s+/,'%').toLowerCase()+'%'
+    '%'+query.replace(/\s+/,'%').toLowerCase()+'%', offset
   ]
   return db.manyOrNone(sql, variables)
     .then(addAuthorsToBooks)
