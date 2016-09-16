@@ -14,3 +14,7 @@ a {
 .invisible {
   visibility: hidden;
 }
+
+.newbook {
+  padding-right: 70%;
+}
