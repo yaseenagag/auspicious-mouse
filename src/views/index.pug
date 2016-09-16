@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p= title
+
+  .jumbotron
+    .containter.invisible
+      h1.h1 Welcome to Learners Guild Library
+      p.lead This site was created by James, Yaseen and Jared in the tenth week. This website has over a thousand books. If there is not a book available and you would like it. Please add it. Enjoy!
+
+
+  div.container
+    h1.h1 Welcome to Learners Guild Library
+    p.lead This site was created by James, Yaseen and Jared in the tenth week. This website has over a thousand books. If there is not a book available and you would like it. Please add it. Enjoy!
+
+    p.lead Check our list of books or search from the menu.
+    span
+      a.btn.btn-success(href='/books') Books Listing &raquo;
