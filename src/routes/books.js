@@ -24,15 +24,14 @@ router.get('/new', (req, res) => {
   })
 })
 
-// CREATE
-router.post('/', (req, res) => {
+router.post( '/', (req, res) => {
   const { book } = req.body
   db.createBook(book)
     .then(book => {
-      res.redirect( '/books/'+ book.id)
+      res.redirect( '/books/' + book.id)
     })
     .catch(error => {
-      res.render('error', {error})
+      res.render('error', { error })
     })
 })
 
@@ -52,9 +51,22 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
+  res.render('books/edit', {
+    book: {}
+  })
 
 })
 
+router.post('/', (req, res) => {
+  const { book } = req.body
+  db.createBook(book)
+    .then(book => {
+      res.redirect( '/books/'+ book.id)
+    })
+    .catch(error => {
+      res.render('error', {error})
+    })
+})
 router.get('/:id/delete', (req, res) => {
   db.deleteBook( req.params.id )
     .then( result => res.redirect ( '/' ))
