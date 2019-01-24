@@ -18,3 +18,21 @@ a {
 .newbook {
   padding-right: 70%;
 }
+
+.form-group {
+  padding-right: 10px;
+}
+
+span {
+  padding-right: 10px;
+}
+
+a.btn.btn-default {
+  margin-right: 10px;
+}
+
+.move {
+  padding-right: 30px
+}
+
+
